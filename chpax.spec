@@ -2,7 +2,7 @@ Summary:	Manage PaX flags for ELF and a.out binaries
 Summary(pl):	Zarz±dca znaczników PaX dla binarek ELF oraz a.out
 Name:		chpax
 Version:	0.20020901
-Release:	2
+Release:	3
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://pageexec.virtualave.net/%{name}.c
@@ -35,7 +35,7 @@ cp `find -name chstk.c` .
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sbindir}
 
-install chpax $RPM_BUILD_ROOT%{_sbindir}
+install chpax chstk $RPM_BUILD_ROOT%{_sbindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
