@@ -3,7 +3,7 @@ Summary(pl):	Zarz±dca znaczników PaX dla binarek ELF oraz a.out
 Name:		chpax
 Version:	0.20011122
 Release:	1
-License:	public domain
+License:	Public Domain
 Group:		Applications/System
 Source0:	http://pageexec.virtualave.net/%{name}.c
 URL:		http://pageexec.virtualave.net/
