@@ -2,10 +2,11 @@ Summary:	Manage PaX flags for ELF and a.out binaries
 Summary(pl):	Zarz±dca znaczników PaX dla binarek ELF oraz a.out
 Name:		chpax
 Version:	0.20020901
-Release:	1
+Release:	2
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://pageexec.virtualave.net/%{name}.c
+Source1:	http://www.openwall.com/linux/linux-2.2.21-ow2.tar.gz 
 URL:		http://pageexec.virtualave.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -22,11 +23,13 @@ a.out. Znaczniki te s± brane pod uwagê tylko w momencie u¿ywania
 odpowiednio za³atanego j±dra systemu.
 
 %prep
-%setup -q -T -c
+%setup -q -T -c -a 1
 install %{SOURCE0} .
+cp `find -name chstk.c` .
 
 %build
 %{__cc} %{rpmcflags} %{rpmldflags} -o chpax chpax.c
+%{__cc} %{rpmcflags} %{rpmldflags} -o chstk chstk.c
 
 %install
 rm -rf $RPM_BUILD_ROOT
