@@ -30,7 +30,7 @@ install %{SOURCE0} .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__install} -d $RPM_BUILD_ROOT%{_sbindir}
+install -d $RPM_BUILD_ROOT%{_sbindir}
 
 install chpax $RPM_BUILD_ROOT%{_sbindir}
 
