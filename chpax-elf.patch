@@ -1,0 +1,37 @@
+Pliki paxtest-0.9.6.orig/chpax-0.5/chpax i paxtest-0.9.6/chpax-0.5/chpax ró¿ni± siê
+diff -uNr paxtest-0.9.6.orig/chpax-0.5/chpax.c paxtest-0.9.6/chpax-0.5/chpax.c
+--- paxtest-0.9.6.orig/chpax-0.5/chpax.c	2004-03-05 12:50:42.000000000 +0100
++++ paxtest-0.9.6/chpax-0.5/chpax.c	2004-03-15 20:56:17.883282576 +0100
+@@ -14,8 +14,8 @@
+  */
+ #include "chpax.h"
+ 
+-struct elf32_hdr	header_elf;
+-struct elf64_hdr	header_elf64;
++Elf32_Ehdr		header_elf;
++Elf64_Ehdr		header_elf64;
+ struct exec		header_aout;
+ int			header_size;
+ void			*header;
+diff -uNr paxtest-0.9.6.orig/chpax-0.5/chpax.h paxtest-0.9.6/chpax-0.5/chpax.h
+--- paxtest-0.9.6.orig/chpax-0.5/chpax.h	2004-03-05 12:50:42.000000000 +0100
++++ paxtest-0.9.6/chpax-0.5/chpax.h	2004-03-15 21:02:18.552452528 +0100
+@@ -10,6 +10,7 @@
+ #include <sys/types.h>
+ #include <fcntl.h>
+ #include <unistd.h>
++#include <linux/user.h>
+ #include <linux/elf.h>
+ #include <linux/a.out.h>
+ 
+@@ -36,8 +37,8 @@
+ #define	FILE_IS_ELF32(h)	(h.e_ident[EI_CLASS] == 1)
+ 
+ /* Extern variables */
+-extern struct elf32_hdr		header_elf;
+-extern struct elf64_hdr		header_elf64;
++extern Elf32_Ehdr		header_elf;
++extern Elf64_Ehdr		header_elf64;
+ extern struct exec		header_aout;
+ extern int			header_size;
+ extern void			*header;
