@@ -1,13 +1,13 @@
 Summary:	Manage PaX flags for ELF and a.out binaries
 Summary(pl):	Zarz±dca znaczników PaX dla binarek ELF oraz a.out
 Name:		chpax
-Version:	0.6
+Version:	0.7
 Release:	1
+Epoch:		1
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://pax.grsecurity.net/%{name}-%{version}.tar.gz
-# Source0-md5:	376ee0327bb6060a03052cdc71bb371f
-Patch0:		%{name}-elf.patch
+# Source0-md5:	6a0aac11abf1a40c50704c7f93bc8953
 URL:		http://pax.grsecurity.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -25,7 +25,6 @@ odpowiednio za³atanego j±dra systemu.
 
 %prep
 %setup -q
-%patch0 -p2
 
 %build
 %{__make} \
