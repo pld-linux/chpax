@@ -31,7 +31,7 @@ odpowiednio za³atanego j±dra systemu.
 
 %build
 %{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}" 
-%{__cc} %{rpmcflags} %{rpmldflags} -o chstk chstk.c
+#%{__cc} %{rpmcflags} %{rpmldflags} -o chstk chstk.c
 
 %install
 rm -rf $RPM_BUILD_ROOT
