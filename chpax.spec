@@ -6,7 +6,7 @@ Release:	3
 License:	Public Domain
 Group:		Applications/System
 Source0:	http://pageexec.virtualave.net/%{name}.c
-Source1:	http://www.openwall.com/linux/linux-2.2.21-ow2.tar.gz 
+Source1:	http://www.openwall.com/linux/linux-2.2.21-ow2.tar.gz
 URL:		http://pageexec.virtualave.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
