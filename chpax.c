@@ -15,10 +15,12 @@
 #include <linux/elf.h>
 #include <linux/a.out.h>
 
-#define HF_PAX_PAGEEXEC         1       /* 0: Enforce PAGE_EXEC */
+#define HF_PAX_PAGEEXEC         1       /* 0: Paging based non-executable pages */
 #define HF_PAX_EMUTRAMP         2       /* 0: Emulate trampolines */
 #define HF_PAX_MPROTECT         4       /* 0: Restrict mprotect() */
 #define HF_PAX_RANDMMAP         8       /* 0: Randomize mmap() base */
+#define HF_PAX_RANDEXEC         16      /* 1: Randomize ET_EXEC base */
+#define HF_PAX_SEGMEXEC         32      /* 0: Segmentation based non-executable pages */
 
 static struct elf32_hdr header_elf;
 static struct exec header_aout;
@@ -107,14 +109,18 @@ int write_header()
 #define USAGE \
 "Usage: %s OPTIONS FILE...\n" \
 "Manage PaX flags for binaries\n\n" \
-"  -P\tenforce PAGE_EXEC\n" \
-"  -p\tdo not enforce PAGE_EXEC\n" \
+"  -P\tenforce paging based non-executable pages\n" \
+"  -p\tdo not enforce paging based non-executable pages\n" \
 "  -E\temulate trampolines\n" \
 "  -e\tdo not emulate trampolines\n" \
 "  -M\trestrict mprotect()\n" \
 "  -m\tdo not restrict mprotect()\n" \
 "  -R\trandomize mmap() base [ELF only]\n" \
 "  -r\tdo not randomize mmap() base [ELF only]\n" \
+"  -X\trandomize ET_EXEC base [ELF only]\n" \
+"  -x\tdo not randomize ET_EXEC base [ELF only]\n" \
+"  -S\tenforce segmentation based non-executable pages\n" \
+"  -s\tdo not enforce segmentation based non-executable pages\n" \
 "  -v\tview current flag state\n\n" \
 "The flags only have effect when running the patched Linux kernel.\n"
 
@@ -133,7 +139,7 @@ int main(int argc, char **argv)
 
 	if (argc < 3) usage(argv[0]);
 	if (strlen(argv[1]) != 2) usage(argv[0]);
-	if (argv[1][0] != '-' || !strchr("pPeEmMrRv", argv[1][1])) usage(argv[0]);
+	if (argv[1][0] != '-' || !strchr("pPeEmMrRxXsSv", argv[1][1])) usage(argv[0]);
 
 	current = &argv[2];
 	do {
@@ -160,7 +166,7 @@ int main(int argc, char **argv)
 			break;
 
 		case 'P':
-			put_flags(flags & ~HF_PAX_PAGEEXEC);
+			put_flags((flags & ~HF_PAX_PAGEEXEC)|HF_PAX_SEGMEXEC);
 			break;
 
 		case 'E':
@@ -187,20 +193,42 @@ int main(int argc, char **argv)
 			put_flags(flags & ~HF_PAX_RANDMMAP);
 			break;
 
+		case 'X':
+			put_flags(flags | HF_PAX_RANDEXEC);
+			break;
+
+		case 'x':
+			put_flags(flags & ~HF_PAX_RANDEXEC);
+			break;
+
+		case 's':
+			put_flags(flags | HF_PAX_SEGMEXEC);
+			break;
+
+		case 'S':
+			put_flags((flags & ~HF_PAX_SEGMEXEC)|HF_PAX_PAGEEXEC);
+			break;
+
 		default:
 			printf("%s: "
-			       "PAGE_EXEC is %s, "
+			       "paging based PAGE_EXEC is %s, "
 			       "trampolines are %s, "
 			       "mprotect() is %s, "
-			       "mmap() base is %s\n", *current,
-				flags & HF_PAX_PAGEEXEC
+			       "mmap() base is %s, "
+			       "ET_EXEC base is %s, "
+			       "segmentation based PAGE_EXEC is %s\n", *current,
+				(flags & HF_PAX_PAGEEXEC) || !(flags & HF_PAX_SEGMEXEC)
 				? "disabled" : "enabled",
 				flags & HF_PAX_EMUTRAMP
 				? "emulated" : "not emulated",
 				flags & HF_PAX_MPROTECT
 				? "not restricted" : "restricted",
 				flags & HF_PAX_RANDMMAP
-				? "not randomized" : "randomized");
+				? "not randomized" : "randomized",
+				flags & HF_PAX_RANDEXEC
+				? "randomized" : "not randomized",
+				flags & HF_PAX_SEGMEXEC
+				? "disabled" : "enabled");
 		}
 
 		if (flags != get_flags())
