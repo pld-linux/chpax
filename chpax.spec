@@ -1,7 +1,7 @@
 Summary:	Manage PaX flags for ELF and a.out binaries
 Summary(pl):	Zarz±dca znaczników PaX dla binarek ELF oraz a.out
 Name:		chpax
-Version:	0.20011122
+Version:	0.20020901
 Release:	1
 License:	Public Domain
 Group:		Applications/System
