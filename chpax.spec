@@ -30,7 +30,7 @@ odpowiednio za³atanego j±dra systemu.
 #cp `find -name chstk.c` .
 
 %build
-%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}" 
+%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}"
 #%{__cc} %{rpmcflags} %{rpmldflags} -o chstk chstk.c
 
 %install
