@@ -5,8 +5,6 @@ Version:	0.20011122
 Release:	1
 License:	public domain
 Group:		Applications/System
-Group(de):	Applikationen/System
-Group(pl):	Aplikacje/System
 Source0:	http://pageexec.virtualave.net/%{name}.c
 URL:		http://pageexec.virtualave.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
