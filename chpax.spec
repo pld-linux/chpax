@@ -1,5 +1,5 @@
 Summary:	Manage PaX flags for ELF and a.out binaries
-Summary(pl):	Zarz±dca znaczników PaX dla binarek ELF oraz a.out
+Summary(pl.UTF-8):   ZarzÄ…dca znacznikÃ³w PaX dla binarek ELF oraz a.out
 Name:		chpax
 Version:	0.7
 Release:	1
@@ -18,10 +18,10 @@ This program manages various PaX related flags for ELF and a.out
 binaries. The flags only have effect when running the patched Linux
 kernel.
 
-%description -l pl
-Program zarz±dzaj±cy flagami zwi±zanymi z PaX w binarkach ELF oraz
-a.out. Znaczniki te s± brane pod uwagê tylko w momencie u¿ywania
-odpowiednio za³atanego j±dra systemu.
+%description -l pl.UTF-8
+Program zarzÄ…dzajÄ…cy flagami zwiÄ…zanymi z PaX w binarkach ELF oraz
+a.out. Znaczniki te sÄ… brane pod uwagÄ™ tylko w momencie uÅ¼ywania
+odpowiednio zaÅ‚atanego jÄ…dra systemu.
 
 %prep
 %setup -q
