@@ -1,5 +1,5 @@
 Summary:	Manage PaX flags for ELF and a.out binaries
-Summary(pl.UTF-8):   Zarządca znaczników PaX dla binarek ELF oraz a.out
+Summary(pl.UTF-8):	Zarządca znaczników PaX dla binarek ELF oraz a.out
 Name:		chpax
 Version:	0.7
 Release:	1
